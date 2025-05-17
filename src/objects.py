@@ -24,8 +24,12 @@ def load_images():
     anvil = pygame.image.load("assets/sprites/anvil.png").convert_alpha()
     anvil = pygame.transform.scale(anvil, (50, 50))
 
+    cake = pygame.image.load("assets/sprites/cake.png").convert_alpha()
+    cake = pygame.transform.scale(cake, (50, 50))
+
     return {
         "emerald": emerald,
         "diamond": diamond,
-        "anvil": anvil
+        "anvil": anvil,
+        "cake": cake
     }
