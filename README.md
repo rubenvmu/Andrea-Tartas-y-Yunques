@@ -1,4 +1,4 @@
-# 🎂 Andrea, Cakes & Anvils ⚗️💎
+# 🎂 Andrea, Tartas y Yunques ⚗️💎
 
 ¡Bienvenida al laboratorio minecraftiano de Andrea!  
 Este juego es un regalo de cumpleaños 🎁 para **Andrea**, la química más genial del planeta 🌍. Prepárate para esquivar yunques, atrapar pasteles 🎂, recolectar esmeraldas 💚 y diamantes 💎...
@@ -60,3 +60,5 @@ python -m src.main
 🎉 ¡Feliz cumpleaños, Andrea! 🎉
 
 Este juego es tuyo. Puedes jugarlo, romperlo o reírte de él. Lo importante es que te recuerde lo especial que eres para nosotras. Es un placer ser tu amigo.
+- Ruben Vasile Marcu Ungureanu, 2025
+- 
