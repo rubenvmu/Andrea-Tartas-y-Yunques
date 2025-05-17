@@ -15,6 +15,13 @@ clock = pygame.time.Clock()
 background = pygame.image.load("assets/sprites/mapu.png").convert()
 background = pygame.transform.scale(background, (screen_width, screen_height))
 
+# Precargar imágenes para el UI
+heart_img = pygame.image.load("assets/sprites/heart.png").convert_alpha()
+heart_img = pygame.transform.scale(heart_img, (24, 24))
+
+avatar_img = pygame.image.load("assets/sprites/andreamedium.png").convert_alpha()
+avatar_img = pygame.transform.scale(avatar_img, (200, 200))
+
 # Variables de juego
 player = Player(screen_width // 2, screen_height - 100)
 objects = []
@@ -48,12 +55,21 @@ while running:
         fall_speed += 0.2
         last_speedup = now
 
-    # Generar objetos
+    # Generar objetos según puntos
     if now - last_spawn > spawn_delay:
-        kind = random.choice(["emerald", "diamond", "anvil"])
-        x = random.randint(0, screen_width - 40)
-        objects.append(FallingObject(x, -50, kind, images[kind]))
         last_spawn = now
+
+        # Determinar cuántos objetos caen a la vez
+        objects_to_spawn = 1
+        if score >= 200:
+            objects_to_spawn = 3
+        elif score >= 50:
+            objects_to_spawn = 2
+
+        for _ in range(objects_to_spawn):
+            kind = random.choice(["emerald", "diamond", "anvil"])
+            x = random.randint(0, screen_width - 40)
+            objects.append(FallingObject(x, -50, kind, images[kind]))
 
     # Actualizar objetos
     for obj in objects[:]:
@@ -73,7 +89,7 @@ while running:
     player.draw(screen)
     for obj in objects:
         obj.draw(screen)
-    draw_ui(screen, score, lives, font)
+    draw_ui(screen, score, lives, font, heart_img, avatar_img)
 
     # Comprobar derrota
     if lives <= 0:
