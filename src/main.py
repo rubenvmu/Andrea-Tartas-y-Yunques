@@ -9,7 +9,7 @@ from src.loading import show_loading_screen  # ✅ AÑADIDO
 pygame.init()
 screen_width, screen_height = 1024, 576
 screen = pygame.display.set_mode((screen_width, screen_height))
-pygame.display.set_caption("Cae Química")
+pygame.display.set_caption("Andrea Cakes y Anvils")
 clock = pygame.time.Clock()
 
 # Mostrar pantalla de carga
