@@ -4,7 +4,7 @@
 Este juego es un regalo de cumpleaños 🎁 para **Andrea**, la química más genial del planeta 🌍. Prepárate para esquivar yunques, atrapar pasteles 🎂, recolectar esmeraldas 💚 y diamantes 💎...
 
 <div align="center">
-  <img src="assets/sprites/loadcscreen.png" alt="Pantalla de carga de Andrea" width="500"/>
+  <img src="assets/sprites/logo_andreacakesyanvils.png" alt="Pantalla de carga de Andrea" width="500"/>
 </div>
 
 ---
@@ -24,6 +24,10 @@ Sin embargo, los yunques no te lo haran tán sencillo.
 - 🪓 **Yunques**: si te dan y no eres inmortal, pierdes una vida  
 
 Tienes **3 vidas**. Si las pierdes todas, el juego termina 😢.
+
+<div align="center">
+  <img src="assets/sprites/loadcscreen.png" alt="Pantalla de carga de Andrea" width="500"/>
+</div>
 
 ---
 
