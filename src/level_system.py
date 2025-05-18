@@ -1,7 +1,7 @@
 class LevelSystem:
-    def __init__(self, base=50, max_level=10):
+    def __init__(self, points_per_level=50, max_level=10):
         self.level = 1
-        self.base = base
+        self.points_per_level = points_per_level
         self.max_level = max_level
 
     def update(self, score):
@@ -9,7 +9,8 @@ class LevelSystem:
             self.level += 1
 
     def required_points(self, level):
-        return sum(self.base * i for i in range(1, level))
+        # Progresión acumulativa: 50 * nivel
+        return sum(self.points_per_level * i for i in range(1, level))
 
     def get_level(self):
         return self.level
