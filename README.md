@@ -15,7 +15,7 @@ Encarnas a **Andrea**, una química brillante en una lluvia caótica de objetos.
 - 💎 **Diamantes** → +10 puntos  
 - 🪓 **Yunques** → Pierdes una vida (a menos que seas inmortal)
 - 🍰 **Pasteles mágicos** → Activan un efecto aleatorio:
-  - ⚡ Aumenta tu velocidad por 10 segundos (alas animadas)
+  - ⚡ Aumenta tu velocidad por 10 segundos y te permiten volar y moverte hacia arriba y hacia abajo (alas animadas)
   - 😇 Inmortalidad temporal (con halo visible)
   - 🧲 Magnetismo: atrae gemas cercanas durante 5 segundos
 - ❤️ **Corazones caídos** → Recuperas una vida (si tienes menos de 10)
@@ -46,7 +46,8 @@ Encarnas a **Andrea**, una química brillante en una lluvia caótica de objetos.
 
 | Tecla         | Acción                                |
 |---------------|----------------------------------------|
-| ⬅️ ⬆️ ⬇️ ➡️    | Mover a Andrea                        |
+| ⬅️ ➡️    | Mover a Andrea                        |
+| ⬆️ ⬇️     | Mover a Andrea con alas (volar)                     |
 | Barra espaciadora (x2) | Megasalto en la dirección actual |
 | ESC           | Pausar el juego                        |
 | ❌            | Cierra la ventana                      |
