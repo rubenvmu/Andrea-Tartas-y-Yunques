@@ -8,6 +8,7 @@ from src.level_system import LevelSystem
 from src.username_input import ask_username
 from src.scoreboard import save_score
 from src.pause_menu import pause_game
+from src.stamina import Stamina
 
 pygame.init()
 screen_width, screen_height = 1024, 576
@@ -38,8 +39,8 @@ def reset_game():
         "objects": [],
         "side_objects": [],
         "score": 0,
-        "lives": 5,
-        "fall_speed": 3,
+        "lives": 1,
+        "fall_speed": 2,
         "level_system": LevelSystem(50),
         "last_spawn": pygame.time.get_ticks(),
         "last_speedup": pygame.time.get_ticks(),
@@ -66,7 +67,7 @@ while running:
 
     now = pygame.time.get_ticks()
     if now - state["last_speedup"] > 2000:
-        state["fall_speed"] += 0.2
+        state["fall_speed"] += 0.1
         state["last_speedup"] = now
 
     if now - state["last_spawn"] > 1000:
@@ -74,9 +75,9 @@ while running:
         level = state["level_system"].get_level()
         emerald_weight = max(0.5 - level * 0.04, 0.05)
         diamond_weight = min(0.1 + level * 0.05, 0.6)
-        anvil_weight = 0.2
+        anvil_weight = 0.15
         cake_weight = 0.2
-        heart_weight = 0.05
+        heart_weight = 0.02
 
         n = 4 if state["score"] >= 200 else 3 if state["score"] >= 50 else 1
 
@@ -90,7 +91,9 @@ while running:
             state["objects"].append(FallingObject(x, -50, kind, images[kind]))
 
     if now - state["last_bus_spawn"] > 8000:
-        state["side_objects"].append(SideObject("bus", images["bus"], screen_width, screen_height))
+        if state["player"].speed > state["player"].base_speed:
+        # Solo genera el autobús si el jugador tiene alas
+            state["side_objects"].append(SideObject("bus", images["bus"], screen_width, screen_height, bottom=True))
         state["last_bus_spawn"] = now
 
     if state["magnet_active"] and now < state["magnet_timer"]:
@@ -154,7 +157,17 @@ while running:
         my = state["player"].rect.top - 45
         screen.blit(magnet_img, (mx, my))
 
-    draw_ui(screen, state["score"], state["lives"], font, heart_img, avatar_img, level, progress)
+    draw_ui(
+    screen,
+    state["score"],
+    state["lives"],
+    font,
+    heart_img,
+    avatar_img,
+    level,
+    progress,
+    player=state["player"]
+)
 
     if state["lives"] <= 0:
         # Guardar en scoreboard.txt además de en el sistema del juego

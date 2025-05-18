@@ -1,5 +1,6 @@
 import pygame
 import time
+from src.stamina import Stamina
 
 class Player:
     def __init__(self, x, y):
@@ -36,15 +37,20 @@ class Player:
         self.last_space_time = 0
         self.space_pressed_once = False
 
+        self.stamina = Stamina()
+
     def update(self, keys, screen_width, screen_height):
         current_time = pygame.time.get_ticks()
+        self.stamina.update()
 
         if keys[pygame.K_SPACE]:
             if not self.space_pressed_once:
                 self.space_pressed_once = True
                 self.last_space_time = current_time
             elif current_time - self.last_space_time < 200:
-                self.megajump()
+                if self.stamina.can_dash():
+                    self.stamina.use()
+                    self.megajump()
                 self.space_pressed_once = False
         else:
             if self.space_pressed_once and current_time - self.last_space_time > 200:
@@ -59,19 +65,21 @@ class Player:
             self.image = self.image_right
             self.direction = "right"
 
-        if keys[pygame.K_UP]:
-            self.rect.y -= self.speed
-            self.image = self.image_up
-            self.direction = "up"
-        elif keys[pygame.K_DOWN]:
-            self.rect.y += self.speed
-            self.image = self.image_down
-            self.direction = "down"
+        if self.speed > self.base_speed:
+            if keys[pygame.K_UP]:
+                self.rect.y -= self.speed
+                self.image = self.image_up
+                self.direction = "up"
+            elif keys[pygame.K_DOWN]:
+                self.rect.y += self.speed
+                self.image = self.image_down
+                self.direction = "down"
+        elif keys[pygame.K_DOWN] or keys[pygame.K_UP]:
+            pass
 
         self.rect.x = max(0, min(self.rect.x, screen_width - self.rect.width))
         self.rect.y = max(0, min(self.rect.y, screen_height - self.rect.height))
 
-        current_time = pygame.time.get_ticks()
         if self.speed_boost_timer > 0 and current_time > self.speed_boost_timer:
             self.speed = self.base_speed
             self.speed_boost_timer = 0
@@ -82,6 +90,9 @@ class Player:
 
         if self.magnet_timer > 0 and current_time > self.magnet_timer:
             self.magnet_timer = 0
+
+        if self.speed == self.base_speed and self.rect.bottom < screen_height:
+            self.rect.y += self.base_speed
 
     def megajump(self):
         jump_distance = 30
@@ -97,13 +108,13 @@ class Player:
     def apply_cake_effect(self, effect):
         current_time = pygame.time.get_ticks()
         if effect == "speed":
-            self.speed = self.base_speed + 4
+            self.speed = self.base_speed + 5
             self.speed_boost_timer = current_time + 10000
         elif effect == "immortality":
             self.is_immortal = True
-            self.immortal_timer = current_time + 10000
+            self.immortal_timer = current_time + 5000
         elif effect == "magnet":
-            self.magnet_timer = current_time + 5000
+            self.magnet_timer = current_time + 2500
             return "magnet"
 
     def has_magnet(self):

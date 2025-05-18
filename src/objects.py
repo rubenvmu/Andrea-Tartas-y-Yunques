@@ -17,7 +17,7 @@ class FallingObject:
 
 
 class SideObject:
-    def __init__(self, kind, image, screen_width, screen_height):
+    def __init__(self, kind, image, screen_width, screen_height, bottom=False):
         self.kind = kind
         self.direction = random.choice(["left", "right"])
         self.speed = random.randint(3, 6)
@@ -35,7 +35,17 @@ class SideObject:
         else:
             self.rect.right = 0
 
-        self.rect.top = random.randint(100, screen_height - 100)
+        # Posición vertical específica para el autobús
+        if self.kind == "bus":
+            if bottom:
+                # Parte baja de la pantalla, 10px por encima del borde inferior
+                self.rect.top = screen_height - self.rect.height - 10
+            else:
+                # Alternativa: zona alta
+                self.rect.top = random.randint(50, screen_height // 2 - 100)
+        else:
+            # Otros objetos laterales pueden variar su posición
+            self.rect.top = random.randint(100, screen_height - 100)
 
     def update(self):
         if self.direction == "left":
@@ -58,5 +68,5 @@ def load_images():
         "anvil": load_and_scale("assets/sprites/anvil.png", (65, 65)),
         "cake": load_and_scale("assets/sprites/cake.png", (65, 65)),
         "heart_falling": load_and_scale("assets/sprites/heart.png", (40, 40)),
-        "bus": load_and_scale("assets/sprites/señorabus.png", (200, 140))  # puedes ajustar a (160, 80) si prefieres
+        "bus": load_and_scale("assets/sprites/señorabus.png", (200, 140))  # Puedes ajustar el tamaño si lo deseas
     }
