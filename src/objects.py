@@ -57,5 +57,6 @@ def load_images():
         "diamond": load_and_scale("assets/sprites/diamond.png", (65, 65)),
         "anvil": load_and_scale("assets/sprites/anvil.png", (65, 65)),
         "cake": load_and_scale("assets/sprites/cake.png", (65, 65)),
-        "bus": load_and_scale("assets/sprites/bus.png", (200, 200))  # puedes ajustar a (160, 80) si prefieres
+        "heart_falling": load_and_scale("assets/sprites/heart.png", (40, 40)),
+        "bus": load_and_scale("assets/sprites/señorabus.png", (200, 140))  # puedes ajustar a (160, 80) si prefieres
     }
